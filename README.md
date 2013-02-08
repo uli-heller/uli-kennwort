@@ -28,9 +28,9 @@ Es wird kompiliert und verpackt über `ant`.
 * Klassenname: com.secretservice.SecretApp
 * Jar-Datei: lib/secretApp.jar
 * Aufruf:
-** `java -cp lib/secretApp.jar com.secretservice.SecretApp ftpserver uli kennwort`
-** `java -jar lib/secretApp.jar ftpserver uli kennwort`
-** `./secretApp-0.1.sh ftpserver uli kennwort`
+    * `java -cp lib/secretApp.jar com.secretservice.SecretApp ftpserver uli kennwort`
+    * `java -jar lib/secretApp.jar ftpserver uli kennwort`
+    * `./secretApp-0.1.sh ftpserver uli kennwort`
 
 Das Testprogramm gibt seine Aufrufparameter in der Konsole aus und wartet dann 60 Sekunden bevor es
 sich beendet. Seine Ausgabe sieht bspw. so aus:
@@ -65,9 +65,9 @@ Zunächst wird eine kleine Klasse geschrieben, die Zeichenketten ver- und entsch
 * Klassenname: org.wrapper.Crypton
 * Jar-Datei: lib/encrypt.jar
 * Aufruf:
-** `java -cp lib/encrypt.jar org.wrapper.Crypton  ftpserver uli kennwort`
-** `java -jar lib/enrypt.jar ftpserver uli kennwort`
-** `./encrypt-0.1.sh ftpserver uli kennwort`
+    * `java -cp lib/encrypt.jar org.wrapper.Crypton  ftpserver uli kennwort`
+    * `java -jar lib/enrypt.jar ftpserver uli kennwort`
+    * `./encrypt-0.1.sh ftpserver uli kennwort`
 
 Das Verschlüsselungsprogramm liefert Ausgaben wie diese:
 
@@ -87,9 +87,9 @@ Die Zeichenketten werden entschlüsselt und an das unveränderte Anwendungsprogr
 * Klassenname: org.wrapper.WrappedApp
 * Jar-Datei: lib/wrappedSecretApp.jar
 * Aufruf:
-** `java -cp lib/wrappedSecretApp.jar org.wrapper.WrappedApp  com.secretservice.SecretApp '3FwSB8kJfD5saH41gp+I28Iflc82GdMjVEJsrv5fCl4=' ...`
-** `java -jar lib/wrappedSecretApp.jar  com.secretservice.SecretApp '3FwSB8kJfD5saH41gp+I28Iflc82GdMjVEJsrv5fCl4=' ...`
-** `./wrappedApp-0.1.sh  com.secretservice.SecretApp '3FwSB8kJfD5saH41gp+I28Iflc82GdMjVEJsrv5fCl4=' ...`
+    * `java -cp lib/wrappedSecretApp.jar org.wrapper.WrappedApp  com.secretservice.SecretApp '3FwSB8kJfD5saH41gp+I28Iflc82GdMjVEJsrv5fCl4=' ...`
+    * `java -jar lib/wrappedSecretApp.jar  com.secretservice.SecretApp '3FwSB8kJfD5saH41gp+I28Iflc82GdMjVEJsrv5fCl4=' ...`
+    * `./wrappedApp-0.1.sh  com.secretservice.SecretApp '3FwSB8kJfD5saH41gp+I28Iflc82GdMjVEJsrv5fCl4=' ...`
 
 Hier nun der Aufruf des unveränderten Testprogramms über die Aufrufhülle:
 
