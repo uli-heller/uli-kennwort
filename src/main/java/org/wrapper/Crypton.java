@@ -117,7 +117,7 @@ public class Crypton {
     static public void main(String[] args) throws InvalidKeyException, InvalidAlgorithmParameterException, ShortBufferException, IllegalBlockSizeException, BadPaddingException {
         Crypton crypton = Crypton.getInstance();
         for (String arg : args) {
-             System.out.println(arg + " -> !" + crypton.encrypt(arg));
+             System.out.println(arg + " -> " + crypton.encrypt(arg));
         }
     }
 
