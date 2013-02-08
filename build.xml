@@ -1,0 +1,108 @@
+<project name="uli-kennwort" default="dist">
+
+<loadproperties>
+  <file file="build.properties"/>
+</loadproperties>
+
+<condition property="EXT" value=".bat" else=".sh">
+  <os family="windows"/>
+</condition>
+
+<path id="classpath.base">
+  <pathelement location="${classes}" />
+  <pathelement location="${commons_codec_jar}" />
+  <!--
+  <fileset dir="lib" erroronmissingdir="false">
+    <include name="**/*.jar"/>
+  </fileset>
+  -->
+</path>
+
+<target name="-prepare">
+  <exec executable="${basedir}/bin/prepare${EXT}" dir="${basedir}">
+  </exec>
+</target> <!-- -prepare -->
+
+<target name="compile" depends="-prepare, compile-java" />
+
+<target name="compile-java">
+  <mkdir dir="${classes}"/>
+  <javac srcdir="src/main/java" debug="true" destdir="${classes}" includeAntRuntime="false">
+    <classpath>
+      <path refid="classpath.base" />
+    </classpath>
+  </javac>
+</target>
+
+<target name="jars" depends="compile">
+ <jar destfile="${secret_jar}" basedir="${classes}" includes="${secret_incl}">
+   <manifest>
+      <attribute name="Main-Class" value="${secret_main}"/>
+   </manifest>
+ </jar>
+ <jar destfile="${wrapped_jar}" basedir="${classes}" includes="${wrapped_incl}">
+   <zipfileset includes="**/*.class" src="${commons_codec_jar}"/>
+   <manifest>
+      <attribute name="Main-Class" value="${wrapped_main}"/>
+   </manifest>
+ </jar>
+ <jar destfile="${encrypt_jar}" basedir="${classes}" includes="${encrypt_incl}">
+   <zipfileset includes="**/*.class" src="${commons_codec_jar}"/>
+   <manifest>
+      <attribute name="Main-Class" value="${encrypt_main}"/>
+   </manifest>
+ </jar>
+</target>
+
+<target name="clean">
+  <delete dir="tmp" />
+  <delete>
+    <fileset dir="lib"/>
+  </delete>
+  <delete dir="build" />
+  <delete>
+    <fileset dir="." defaultexcludes="no">
+      <include name="**/*~" />
+      <include name="**/*.class" />
+      <include name="${secret_app}*" />
+      <include name="${wrapped_app}*" />
+      <include name="${encrypt_app}*" />
+    </fileset>
+  </delete>
+</target>
+
+<target name="all" depends="dist"/>
+
+<target name="dist" depends="jars">
+  <copy file="${dist_sh}" tofile="${secret_app}.sh"/>
+  <concat append="true" binary="true" destfile="${secret_app}.sh">
+    <fileset dir="." includes="${secret_jar}"/>
+  </concat>
+  <chmod file="${secret_app}.sh" perm="a+x"/>
+  <copy file="${dist_bat}" tofile="${secret_app}.bat"/>
+  <concat append="true" binary="true" destfile="${secret_app}.bat">
+    <fileset dir="." includes="${secret_jar}"/>
+  </concat>
+
+  <copy file="${dist_sh}" tofile="${wrapped_app}.sh"/>
+  <concat append="true" binary="true" destfile="${wrapped_app}.sh">
+    <fileset dir="." includes="${wrapped_jar}"/>
+  </concat>
+  <chmod file="${wrapped_app}.sh" perm="a+x"/>
+  <copy file="${dist_bat}" tofile="${wrapped_app}.bat"/>
+  <concat append="true" binary="true" destfile="${wrapped_app}.bat">
+    <fileset dir="." includes="${wrapped_jar}"/>
+  </concat>
+
+  <copy file="${dist_sh}" tofile="${encrypt_app}.sh"/>
+  <concat append="true" binary="true" destfile="${encrypt_app}.sh">
+    <fileset dir="." includes="${encrypt_jar}"/>
+  </concat>
+  <chmod file="${encrypt_app}.sh" perm="a+x"/>
+  <copy file="${dist_bat}" tofile="${encrypt_app}.bat"/>
+  <concat append="true" binary="true" destfile="${encrypt_app}.bat">
+    <fileset dir="." includes="${encrypt_jar}"/>
+  </concat>
+</target>
+
+</project>
