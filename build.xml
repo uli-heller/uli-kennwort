@@ -75,31 +75,37 @@
 
 <target name="dist" depends="jars">
   <copy file="${dist_sh}" tofile="${secret_app}.sh"/>
+  <fixcrlf file="${secret_app}.sh" eol="unix" eof="remove"/>
   <concat append="true" binary="true" destfile="${secret_app}.sh">
     <fileset dir="." includes="${secret_jar}"/>
   </concat>
   <chmod file="${secret_app}.sh" perm="a+x"/>
   <copy file="${dist_bat}" tofile="${secret_app}.bat"/>
+  <fixcrlf file="${secret_app}.bat" eol="dos" eof="add"/>
   <concat append="true" binary="true" destfile="${secret_app}.bat">
     <fileset dir="." includes="${secret_jar}"/>
   </concat>
 
   <copy file="${dist_sh}" tofile="${wrapped_app}.sh"/>
+  <fixcrlf file="${wrapped_app}.sh" eol="unix" eof="remove"/>
   <concat append="true" binary="true" destfile="${wrapped_app}.sh">
     <fileset dir="." includes="${wrapped_jar}"/>
   </concat>
   <chmod file="${wrapped_app}.sh" perm="a+x"/>
   <copy file="${dist_bat}" tofile="${wrapped_app}.bat"/>
+  <fixcrlf file="${wrapped_app}.bat" eol="dos" eof="add"/>
   <concat append="true" binary="true" destfile="${wrapped_app}.bat">
     <fileset dir="." includes="${wrapped_jar}"/>
   </concat>
 
   <copy file="${dist_sh}" tofile="${encrypt_app}.sh"/>
+  <fixcrlf file="${encrypt_app}.sh" eol="unix" eof="remove"/>
   <concat append="true" binary="true" destfile="${encrypt_app}.sh">
     <fileset dir="." includes="${encrypt_jar}"/>
   </concat>
   <chmod file="${encrypt_app}.sh" perm="a+x"/>
   <copy file="${dist_bat}" tofile="${encrypt_app}.bat"/>
+  <fixcrlf file="${encrypt_app}.bat" eol="dos" eof="add"/>
   <concat append="true" binary="true" destfile="${encrypt_app}.bat">
     <fileset dir="." includes="${encrypt_jar}"/>
   </concat>
